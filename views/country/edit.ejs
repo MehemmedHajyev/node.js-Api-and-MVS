@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>Edit Country</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="/countries/edit" method="post">
+            <input type="hidden" name="id" value="<%= data.id %>">
+            <div class="row mx-0 mt-3">
+                <div class="col-4">
+                    <label for="txtSortCode">Sort Code</label>
+                </div>
+                <div class="col-8">
+                    <input name="sortCode" value="<%= data.sortCode %>" type="text" id="txtSortCode" class="form-control">
+                </div>
+            </div>
+            <div class="row mx-0 mt-3">
+                <div class="col-4">
+                    <label for="txtName">Name</label>
+                </div>
+                <div class="col-8">
+                    <input name="name" value="<%= data.name %>" type="text" id="txtName" class="form-control">
+                </div>
+            </div>
+            <div class="row mx-0 mt-4">
+                <div class="col-12">
+                    <input type="submit" value="Edit" class="btn btn-block btn-primary">
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

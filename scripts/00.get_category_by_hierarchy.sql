@@ -1,0 +1,29 @@
+
+CREATE
+OR REPLACE FUNCTION FN_GETCATEGORYBYHIERARCHY (PARAM_ID INTEGER) RETURNS TABLE (ID INTEGER, NAME VARCHAR, PARENT_ID INTEGER) LANGUAGE PLPGSQL AS $$
+BEGIN
+    RETURN QUERY 
+    WITH RECURSIVE CATEGORIES_H AS (
+        SELECT
+            c.ID,
+            c.NAME,
+            c.PARENT_ID
+        FROM
+            CATEGORIES C
+        WHERE
+            C.ID = PARAM_ID
+        UNION ALL
+        SELECT
+            C.ID,
+            C.NAME,
+            C.PARENT_ID
+        FROM
+            CATEGORIES C
+        INNER JOIN CATEGORIES_H CH ON C.PARENT_ID = CH.ID
+    )
+    SELECT
+        *
+    FROM
+        CATEGORIES_H;
+END; 
+$$;
